@@ -1,21 +1,29 @@
 import React from 'react';
 import { View, Text, Image } from 'react-native';
 import { RectButton, BorderlessButton } from 'react-native-gesture-handler';
+import { useNavigation } from '@react-navigation/native';
 
-import logo from '../../assets/images/logo2.png'
-import instagramIcon from '../../assets/images/instagramIcon.png'
-import SvgTest from '../../assets/images/svgTest'
+import Logo from '../../assets/images/logo2.png'
+import InstagramIcon from '../../assets/images/instagramIcon.png'
+import RecicleIcon from '../../assets/images/recicleIcon'
 
 import { FontAwesome5 } from '@expo/vector-icons';
-import { FontAwesome } from '@expo/vector-icons'; 
+import { FontAwesome } from '@expo/vector-icons';
+import { MaterialCommunityIcons } from '@expo/vector-icons';  
 
 import styles from './styles';
 
 function Welcome() {
+  const { navigate } = useNavigation();
+
+  function handleNavigateToSearchLocation() {
+    navigate('SearchLocation')
+  }
+
   return(
     <>
       <View style={styles.logoContainer}>
-        <Image source={logo} style={styles.logoImage} />
+        <Image source={Logo} style={styles.logoImage} />
         <Text style={styles.title}>Tecnologia Ambiental e {'\n'}Sustentabilidade</Text>
       </View>
       <View style={styles.container}>
@@ -26,11 +34,11 @@ function Welcome() {
 
         <View style={styles.buttonsContainer}>
           <RectButton
-            onPress={undefined}
+            onPress={handleNavigateToSearchLocation}
             style={[styles.button, styles.buttonPrimary]}
           >
             <View style={styles.svgMargin}>
-              <SvgTest />
+              <RecicleIcon />
             </View>
             <Text style={[styles.buttonText, styles.buttonTextPrimary]}>Locais de Reciclagem</Text>
           </RectButton>
@@ -39,8 +47,8 @@ function Welcome() {
             onPress={undefined}
             style={[styles.button, styles.buttonSecondary]}
           >
-            <FontAwesome name="question-circle-o" size={78} color="white" />
-            <Text style={[styles.buttonText, styles.buttonTextSecondary]}>Sobre nós</Text>
+            <MaterialCommunityIcons name="office-building" size={78} color="white" />
+            <Text style={styles.buttonText}>Cadastre sua empresa</Text>
           </RectButton>
         </View>
       </View>
@@ -53,11 +61,11 @@ function Welcome() {
           </BorderlessButton>
 
           <BorderlessButton>
-            <FontAwesome name="twitter-square" size={40} color="black" />
+            <FontAwesome name="twitter-square" size={40} color="#08A0E9" />
           </BorderlessButton>
 
           <BorderlessButton>
-            <Image source={instagramIcon} resizeMode='contain'/>
+            <Image source={InstagramIcon} resizeMode='contain'/>
           </BorderlessButton>
         </View>
       </View>

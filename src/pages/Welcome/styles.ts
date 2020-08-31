@@ -50,8 +50,8 @@ const styles = StyleSheet.create({
   button: {
     width: '48%',
     height: 120,
-    borderRadius: 8,
-    alignItems: 'center'
+    borderRadius: 10,
+    alignItems: 'center',
   },
 
   svgMargin: {
@@ -59,7 +59,8 @@ const styles = StyleSheet.create({
   },
 
   buttonPrimary: {
-    backgroundColor: '#328764'
+    backgroundColor: '#328764',
+    borderColor: 'yellow'
   },
 
   buttonSecondary: {
@@ -75,10 +76,6 @@ const styles = StyleSheet.create({
 
   buttonTextPrimary: {
     margin: -5
-  },
-
-  buttonTextSecondary: {
-    marginTop: 5
   },
 
   socialMediasContainer: {
@@ -98,7 +95,7 @@ const styles = StyleSheet.create({
 
   socialMediasButtonsContainer: {
     width: '50%',
-    alignItems: "baseline",
+    alignItems: 'baseline',
     justifyContent: 'space-between',
     flexDirection: 'row',
     margin: 10
