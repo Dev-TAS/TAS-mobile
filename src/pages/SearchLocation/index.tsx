@@ -1,15 +1,31 @@
 import React, { useState } from 'react'
 import { View, Text, Dimensions } from 'react-native'
-import { BorderlessButton, TextInput, RectButton } from 'react-native-gesture-handler';
+import { BorderlessButton, TextInput, RectButton, ScrollView } from 'react-native-gesture-handler';
 import { FontAwesome5 } from '@expo/vector-icons'; 
 
 import LocationSVG from '../../assets/images/locationSVG'
+import CompanyItem, { Company } from '../../components/CompanyItem';
 
 import styles from './styles';
 
 function SearchLocation() {
   const[state, setState] = useState('');
   const[city, setCity] = useState('');
+
+  const company: Company = {
+    id: 1,
+    name: 'Empresa Teste LTDA',
+    phone: '98848-1631',
+    whatsapp: '98848-1631',
+    serviceType: 'Comercialização',
+    state: 'Rio de Janeiro',
+    city: 'São Gonçalo',
+    neighborhood: 'Pita',
+    street: 'Adélia Cintra',
+    locationNumber: 20,
+    cnpj: '00000000000-00',
+    avatar: 'https://blog.locaweb.com.br/wp-content/uploads/2014/05/95141903.jpg'
+  }
 
   const[isFiltersVisible, setIsFiltersVisible] = useState(false);
   const[isBannerVisible, setIsBannerVisible] = useState(true);
@@ -20,7 +36,7 @@ function SearchLocation() {
 
   function handleToggleFiltersVisible() {
     setIsFiltersVisible(!isFiltersVisible);
-    isBannerVisible ? handleToggleBannerVisible() : null
+    handleToggleBannerVisible();
   }
 
   return (
@@ -42,7 +58,8 @@ function SearchLocation() {
           </BorderlessButton>
         </View>
 
-        { isFiltersVisible && <View style={styles.searchAreaContainer}> 
+        { isFiltersVisible && 
+          <View style={styles.searchAreaContainer}> 
             <View style={styles.formContainer}>
               <TextInput
                 style={styles.input}
@@ -58,19 +75,39 @@ function SearchLocation() {
               />
             </View>
 
-            <RectButton style={styles.buttonSearch}>
+            <RectButton 
+              style={styles.buttonSearch}
+              onPress={handleToggleFiltersVisible}
+            >
               <FontAwesome5 name="search-location" size={40} color="white" />
             </RectButton>
           </View>
         }
 
         <View style={styles.currentLocationContainer}>
-  <Text style={styles.currentLocationText}>Ou encontre {'\n'}locais com sua</Text>
+          <Text style={styles.currentLocationText}>Ou encontre {'\n'}locais com sua</Text>
           <BorderlessButton>
             <Text style={styles.currentLocationButtonText}>Localização Atual</Text>
           </BorderlessButton>
         </View>
       </View>
+      { company && 
+        <ScrollView 
+          style={styles.scrollContainer}
+        >
+          <CompanyItem company={company}/>
+          <CompanyItem company={company}/>
+          <CompanyItem company={company}/>
+          <CompanyItem company={company}/>
+          <CompanyItem company={company}/>
+          <CompanyItem company={company}/>
+          <CompanyItem company={company}/>
+          <CompanyItem company={company}/>
+          <CompanyItem company={company}/>
+          <CompanyItem company={company}/>
+          <CompanyItem company={company}/>
+        </ScrollView>
+      }   
     </>
   );
 }

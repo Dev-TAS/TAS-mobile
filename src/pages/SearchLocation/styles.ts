@@ -86,6 +86,11 @@ const styles = StyleSheet.create({
     textDecorationLine: "underline",
     fontSize: FontSize(14),
     color: '#32B72F'
+  },
+
+  scrollContainer: {
+    minHeight: 0,
+    maxHeight: '50%',
   }
 })
 

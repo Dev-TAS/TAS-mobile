@@ -4,6 +4,7 @@ import { createStackNavigator } from '@react-navigation/stack'
 
 import Welcome from '../pages/Welcome'
 import SearchLocation from '../pages/SearchLocation'
+import Maps from '../pages/Map'
 
 const {Navigator, Screen} = createStackNavigator();
 function AppStack() {
@@ -12,6 +13,7 @@ function AppStack() {
       <Navigator screenOptions={{ headerShown: false }}>
         <Screen name='Welcome' component={Welcome} />
         <Screen name='SearchLocation' component={SearchLocation} />
+        <Screen name='Maps' component={Maps} />
       </Navigator>
     </NavigationContainer>
   )
