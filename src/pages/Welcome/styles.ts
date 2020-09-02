@@ -52,6 +52,11 @@ const styles = StyleSheet.create({
     height: 120,
     borderRadius: 10,
     alignItems: 'center',
+    elevation: 15,
+    shadowColor: '#000',
+    shadowOpacity: 1,
+    shadowOffset: {width: 0, height: 0},
+    shadowRadius: 15,
   },
 
   svgMargin: {
@@ -59,8 +64,7 @@ const styles = StyleSheet.create({
   },
 
   buttonPrimary: {
-    backgroundColor: '#328764',
-    borderColor: 'yellow'
+    backgroundColor: '#328764'
   },
 
   buttonSecondary: {

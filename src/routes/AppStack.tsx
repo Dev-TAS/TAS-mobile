@@ -4,7 +4,7 @@ import { createStackNavigator } from '@react-navigation/stack'
 
 import Welcome from '../pages/Welcome'
 import SearchLocation from '../pages/SearchLocation'
-import Maps from '../pages/Map'
+import Maps from '../components/Map'
 
 const {Navigator, Screen} = createStackNavigator();
 function AppStack() {
