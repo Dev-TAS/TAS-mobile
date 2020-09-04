@@ -7,7 +7,6 @@ export default class Search extends React.Component<{ onLocationSelected: any }>
   state = {
     searchFocused: false
   }
-
   render() {
     const { onLocationSelected } = this.props;
     const { searchFocused } = this.state;

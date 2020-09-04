@@ -24,7 +24,11 @@ function SearchLocation() {
     street: 'Adélia Cintra',
     locationNumber: 20,
     cnpj: '00000000000-00',
-    avatar: 'https://blog.locaweb.com.br/wp-content/uploads/2014/05/95141903.jpg'
+    avatar: 'https://blog.locaweb.com.br/wp-content/uploads/2014/05/95141903.jpg',
+    mapLocation: {
+      latitude:-22.8853169,
+      longitude: -43.0504129
+    }
   }
 
   const[isFiltersVisible, setIsFiltersVisible] = useState(false);

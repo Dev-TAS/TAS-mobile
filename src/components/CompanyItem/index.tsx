@@ -22,6 +22,10 @@ export interface Company {
   locationNumber: number;
   cnpj: string;
   avatar: string;
+  mapLocation?: {
+    latitude: number;
+    longitude: number;
+  }
 }
 
 interface CompanyItemProps {

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import MapView, { Marker } from 'react-native-maps';
+import MapView, { Marker, AnimatedRegion } from 'react-native-maps';
 import { getPixelSize } from '../utils'
 import { View } from 'react-native';
 
@@ -10,11 +10,11 @@ import locationIcon from '../../assets/images/locationIcon.png'
 
 import styles from './styles'
 
-class Maps extends Component {
+class Maps extends React.Component {
   mapView: any;
   state = {
     region: undefined,
-    destination: null,
+    destination: undefined             /*destination: {latitude: -22.8853169,longitude: -43.0504129},*/
   }
 
   async componentDidMount() {
@@ -49,7 +49,6 @@ class Maps extends Component {
         title: data.structured_formatting.main_text,
       },
     })
-    console.log(data.structured_formatting.main_text)
   }
 
   render() {
@@ -84,12 +83,13 @@ class Maps extends Component {
               }
               />
               <Marker
-              coordinate={destination}
-              image={locationIcon} />
+                coordinate={destination}
+                image={locationIcon}
+              />
             </>
           )}
         </MapView>
-        <Search onLocationSelected={this.handleLocationSelected}  />
+        <Search onLocationSelected={this.handleLocationSelected} />
         </View>
       </>
     );
