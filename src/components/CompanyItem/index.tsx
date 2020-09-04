@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text, Image } from 'react-native';
+import { View, Text, Image, Linking } from 'react-native';
 import { BorderlessButton } from 'react-native-gesture-handler';
 
 import { FontAwesome5 } from '@expo/vector-icons'; 
@@ -12,8 +12,8 @@ export interface Company {
   id: number;
   name: string;
   email?: string;
-  phone: string;
-  whatsapp?: string;
+  phone: string | undefined;
+  whatsapp?: string | undefined;
   serviceType: string;
   state: string;
   city: string;
@@ -21,11 +21,11 @@ export interface Company {
   street: string;
   locationNumber: number;
   cnpj: string;
-  avatar: string;
+  avatar?: string | undefined;
   mapLocation?: {
     latitude: number;
     longitude: number;
-  }
+  } | undefined;
 }
 
 interface CompanyItemProps {
@@ -39,6 +39,15 @@ const CompanyItem: React.FC<CompanyItemProps> = ( {company} ) => {
   function handleNavigateToMap() {
     navigate('Maps')
   }
+
+  function handleLinkToWhatsapp() {
+    Linking.openURL(`whatsapp://send?text=Olá! vim através do TAS! &phone=${company.whatsapp}`)
+  }
+
+  function handleLinkToTel() {
+    Linking.openURL(`tel://${company.phone}`)
+  }
+
   return (
     <View style={styles.container}>
       <View style={styles.nameContainer}>
@@ -56,12 +65,16 @@ const CompanyItem: React.FC<CompanyItemProps> = ( {company} ) => {
           <Text style={styles.buttonText}>Visualizar no Maps</Text>
         </BorderlessButton>
 
-        <BorderlessButton>
-          <Text style={styles.buttonText}>Telefone de contato </Text>
+        <BorderlessButton
+          enabled={company.phone? true : false}
+          onPress={handleLinkToTel}
+        >
+          <Text style={styles.buttonText}>Telefone de contato</Text>
         </BorderlessButton>
 
         <BorderlessButton 
           enabled={company.whatsapp? true : false}
+          onPress={handleLinkToWhatsapp}
         >
           <FontAwesome5 name="whatsapp" size={40} color={company.whatsapp? "white" : "grey"} />
         </BorderlessButton>

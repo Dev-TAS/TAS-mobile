@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { View, Text, Dimensions } from 'react-native'
+import { View, Text, Dimensions} from 'react-native'
 import { BorderlessButton, TextInput, RectButton, ScrollView } from 'react-native-gesture-handler';
 import { FontAwesome5 } from '@expo/vector-icons'; 
 
@@ -15,8 +15,8 @@ function SearchLocation() {
   const company: Company = {
     id: 1,
     name: 'Empresa Teste LTDA',
-    phone: '98848-1631',
-    whatsapp: '98848-1631',
+    phone: '552198770-8021',
+    whatsapp: '552198770-8021',
     serviceType: 'Comercialização',
     state: 'Rio de Janeiro',
     city: 'São Gonçalo',
