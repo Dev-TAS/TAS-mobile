@@ -37,7 +37,7 @@ const CompanyItem: React.FC<CompanyItemProps> = ( {company} ) => {
   const { navigate } = useNavigation();
 
   function handleNavigateToMap() {
-    navigate('Maps')
+    navigate('Maps', { mapLocation: company.mapLocation })
   }
 
   function handleLinkToWhatsapp() {

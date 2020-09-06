@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import MapView, { Marker, AnimatedRegion } from 'react-native-maps';
+import MapView, { Marker } from 'react-native-maps';
 import { getPixelSize } from '../utils'
 import { View } from 'react-native';
 
@@ -10,13 +10,14 @@ import locationIcon from '../../assets/images/locationIcon.png'
 
 import styles from './styles'
 
-class Maps extends React.Component {
+class Maps extends Component<{ route: any }> {
+  route: any
   mapView: any;
   state = {
     region: undefined,
-    destination: undefined             /*destination: {latitude: -22.8853169,longitude: -43.0504129},*/
+    destination: this.props.route.params.mapLocation || undefined,           /*destination: {latitude: -22.8853169,longitude: -43.0504129},*/
   }
-
+ 
   async componentDidMount() {
     navigator.geolocation.getCurrentPosition(
       ({ coords: { latitude, longitude } }) => {
@@ -52,7 +53,7 @@ class Maps extends React.Component {
   }
 
   render() {
-    const { region, destination } = this.state; 
+    const { region, destination } = this.state;
     return (
       <>
         <View>

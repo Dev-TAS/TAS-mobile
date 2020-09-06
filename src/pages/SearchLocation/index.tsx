@@ -27,7 +27,7 @@ function SearchLocation() {
     avatar: 'https://blog.locaweb.com.br/wp-content/uploads/2014/05/95141903.jpg',
     mapLocation: {
       latitude:-22.8853169,
-      longitude: -43.0504129
+      longitude: -43.0504129,
     }
   }
 
