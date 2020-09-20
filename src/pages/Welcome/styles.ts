@@ -1,110 +1,84 @@
-import { StyleSheet } from 'react-native';
 
-import FontSize from '../../assets/responsiveFontSize'
+import { StyleSheet } from 'react-native';
+import FontSize from '../../assets/responsiveFontSize';
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    paddingHorizontal: '7.5%',
+    paddingVertical: '20%',
+    backgroundColor: '#32B72F',
+    justifyContent: 'space-between'
+  },
 
   logoContainer: {
-    width: '100%',
-    height: '30%',
-    justifyContent: 'center',
     alignItems: 'center',
-    padding: 40,
-    backgroundColor: '#32B72F'
+    justifyContent: 'center',
   },
 
   logoImage: {
-    resizeMode: 'contain',
-    width: 130
+    resizeMode: "contain"
   },
 
-  title: {
+  logoText: {
+    color: 'black',
     textAlign: 'center',
-    fontSize: 20,
+    fontSize: FontSize(16),
     fontFamily: 'Poppins_400Regular'
   },
 
-  container: {
-    flex: 1,
-    justifyContent: "flex-start",
-    padding: 40,
-    backgroundColor: '#E6E6F0'
+  welcomeText: {
+    fontSize: FontSize(16),
+    color: 'white',
+    fontFamily: 'Poppins_400Regular'
   },
 
-  welcome: {
-    fontFamily: 'Archivo_400Regular',
-    fontSize: FontSize(17)
-  },
-
-  welcomeBold: {
-    fontFamily: 'Archivo_700Bold'
+  welcomeTextBold: {
+    fontFamily: 'Poppins_600SemiBold'
   },
 
   buttonsContainer: {
-    width: '100%',
+    marginTop: 8,
     flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginVertical: '10%'
+    width: '100%',
+    justifyContent: 'space-between'
   },
 
   button: {
-    width: '48%',
+    width: '46%',
     height: 120,
-    borderRadius: 10,
     alignItems: 'center',
-    elevation: 15,
+    justifyContent: 'space-between',
+    paddingTop: '3%',
+    borderRadius: 10,
+    elevation: 10,
     shadowColor: '#000',
-    shadowOpacity: 1,
-    shadowOffset: {width: 0, height: 0},
+    shadowOpacity: 0.1,
+    shadowOffset: {width: 5, height: 5},
     shadowRadius: 15,
   },
 
-  svgMargin: {
-    marginLeft: 20
+  buttonText: {
+    color: 'white',
+    fontSize: FontSize(15),
+    fontFamily: 'Poppins_600SemiBold',
+    textAlign: 'center'
   },
 
   buttonPrimary: {
-    backgroundColor: '#328764'
+    backgroundColor: '#1C9E19',
   },
 
   buttonSecondary: {
     backgroundColor: '#2F76B7',
-    justifyContent: 'center',
-    paddingTop: 10
   },
 
-  buttonText: {
-    color: '#FFF',
-    fontSize: FontSize(13),
-  },
-
-  buttonTextPrimary: {
-    margin: -5
-  },
-
-  socialMediasContainer: {
-    width: '100%',
-    backgroundColor: '#E6E6F0',
+  aboutUsButton: {
+    height: 70,
+    alignSelf: 'center',
     alignItems: 'center',
-    justifyContent: 'space-between',
-    paddingHorizontal: 40
-  },
-
-  socialMediasText: {
-    color: '#212529',
-    fontSize: FontSize(14),
-    fontWeight: 'bold',
-    textAlign: 'center'
-  },
-
-  socialMediasButtonsContainer: {
-    width: '50%',
-    alignItems: 'baseline',
-    justifyContent: 'space-between',
-    flexDirection: 'row',
-    margin: 10
+    justifyContent: 'center'
   }
-
 })
 
 export default styles;

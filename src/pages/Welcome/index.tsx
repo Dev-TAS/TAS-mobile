@@ -1,76 +1,59 @@
-import React from 'react';
-import { View, Text, Image } from 'react-native';
-import { RectButton, BorderlessButton } from 'react-native-gesture-handler';
+import React from 'react'
+import { Image, Text, View } from 'react-native';
+import { BorderlessButton, RectButton } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
 
-import Logo from '../../assets/images/logo2.png'
-import InstagramIcon from '../../assets/images/instagramIcon.png'
-import RecicleIcon from '../../assets/images/recicleIcon'
+import styles from './styles'
 
+import Logo from '../../assets/images/logo.png'
 import { FontAwesome5 } from '@expo/vector-icons';
-import { FontAwesome } from '@expo/vector-icons';
-import { MaterialCommunityIcons } from '@expo/vector-icons';  
-
-import styles from './styles';
 
 function Welcome() {
   const { navigate } = useNavigation();
 
-  function handleNavigateToSearchLocation() {
-    navigate('SearchLocation')
+  function hadleNavigateToUserLogin() {
+    navigate('Login', {connectionType: true})
   }
 
-  return(
-    <>
+  function hadleNavigateToCompanyLogin() {
+    navigate('Login', {connectionType: null})
+  }
+
+  return (
+    <View style={styles.container}>
       <View style={styles.logoContainer}>
-        <Image source={Logo} style={styles.logoImage} />
-        <Text style={styles.title}>Tecnologia Ambiental e {'\n'}Sustentabilidade</Text>
+        <Image source={Logo} style={styles.logoImage}/>
+        <Text style={styles.logoText}>Tecnologia Ambiental e{'\n'}Sustentabilidade</Text>
       </View>
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Seja bem vindo!{'\n'}
-          <Text style={styles.welcomeBold}>O que deseja fazer?</Text>
+      <View>
+        <Text style={styles.welcomeText}>Seja bem vindo! {'\n'}
+          <Text style={styles.welcomeTextBold}>Deseja se conectar como:</Text>
         </Text>
-
         <View style={styles.buttonsContainer}>
-          <RectButton
-            onPress={handleNavigateToSearchLocation}
+          <RectButton 
             style={[styles.button, styles.buttonPrimary]}
+            onPress={hadleNavigateToUserLogin}
           >
-            <View style={styles.svgMargin}>
-              <RecicleIcon />
-            </View>
-            <Text style={[styles.buttonText, styles.buttonTextPrimary]}>Locais de Reciclagem</Text>
+            <FontAwesome5 name="user-alt" size={80} color="white" />
+            <Text style={styles.buttonText}>Usuário</Text>
           </RectButton>
 
-          <RectButton
-            onPress={undefined}
+          <RectButton 
             style={[styles.button, styles.buttonSecondary]}
+            onPress={hadleNavigateToCompanyLogin}
           >
-            <MaterialCommunityIcons name="office-building" size={78} color="white" />
-            <Text style={styles.buttonText}>Cadastre sua empresa</Text>
+            <FontAwesome5 name="building" size={80} color="white" />
+            <Text style={styles.buttonText}>Empresa</Text>
           </RectButton>
         </View>
       </View>
-
-      <View style={styles.socialMediasContainer}>
-        <Text style={styles.socialMediasText}>Nos acompanhe em todo lugar!{'\n'} Redes sociais:</Text>
-        <View style={styles.socialMediasButtonsContainer}>
-          <BorderlessButton>
-            <FontAwesome5 name="facebook-square" size={40} color="#3b5998" />
-          </BorderlessButton>
-
-          <BorderlessButton>
-            <FontAwesome name="twitter-square" size={40} color="#08A0E9" />
-          </BorderlessButton>
-
-          <BorderlessButton>
-            <Image source={InstagramIcon} resizeMode='contain'/>
-          </BorderlessButton>
-        </View>
-      </View>
-    </>
-  );
+      
+      <BorderlessButton style={styles.aboutUsButton}>
+        <FontAwesome5 name="question-circle" size={50} color="white" />
+        <Text style={styles.buttonText}>Sobre nós</Text>
+      </BorderlessButton>
+    </View>
+  )
 }
 
 export default Welcome;
