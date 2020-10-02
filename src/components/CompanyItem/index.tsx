@@ -10,7 +10,7 @@ import { useNavigation } from '@react-navigation/native';
 
 export interface Company {
   id: number;
-  name: string;
+  company_name: string;
   email?: string;
   phone: string | undefined;
   whatsapp?: string | undefined;
@@ -22,10 +22,8 @@ export interface Company {
   locationNumber: number;
   cnpj: string;
   avatar?: string | undefined;
-  mapLocation?: {
-    latitude: number;
-    longitude: number;
-  } | undefined;
+  latitude: number;
+  longitude: number;
 }
 
 interface CompanyItemProps {
@@ -33,13 +31,14 @@ interface CompanyItemProps {
 }
 
 const CompanyItem: React.FC<CompanyItemProps> = ( {company} ) => {
-
+  const latitude = company.latitude;
+  const longitude = company.longitude;
   const { navigate } = useNavigation();
-
+  const mapLocation = { latitude, longitude }
   function handleNavigateToMap() {
-    navigate('Maps', { mapLocation: company.mapLocation })
+    navigate('Maps', {mapLocation})
   }
-
+  
   function handleLinkToWhatsapp() {
     Linking.openURL(`whatsapp://send?text=Olá! vim através do TAS! &phone=${company.whatsapp}`)
   }
@@ -53,11 +52,11 @@ const CompanyItem: React.FC<CompanyItemProps> = ( {company} ) => {
       <View style={styles.nameContainer}>
         <Image style={styles.avatar} source={ { uri:company.avatar } } />
           <Text style={styles.name}>
-            {company.name}
+            {company.company_name}
           </Text> 
       </View>
       <Text style={styles.address}>
-              Rua {company.street} {company.locationNumber}, {company.neighborhood}, {company.city}, {company.state}aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa 
+              {company.street} {company.locationNumber}, {company.neighborhood}, {company.city}, {company.state}
             </Text>
       <Text style={styles.type}>Tipo de serviço: {company.serviceType}</Text>
       <View style={styles.options}>

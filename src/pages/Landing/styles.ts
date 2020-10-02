@@ -10,7 +10,15 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     padding: 40,
+    
+  },
+
+  logoContainerUser: {
     backgroundColor: '#32B72F'
+  },
+
+  logoContainerCompany: {
+    backgroundColor: '#2F76B7'
   },
 
   logoImage: {
@@ -103,8 +111,53 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     flexDirection: 'row',
     margin: 10
-  }
+  },
 
+  registerContainer: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingHorizontal: '7.5%'
+  },
+
+  registerContainerUser: {
+    backgroundColor: '#32B72F'
+  },
+
+  registerContainerCompany: {
+    backgroundColor: '#2F76B7'
+  },
+
+  registerText: {
+    fontSize: FontSize(18),
+    textAlign: 'center',
+    color: 'white',
+    fontFamily: 'Poppins_600SemiBold'
+  },
+
+  registerButton: {
+    width: '100%',
+    height: 70,
+    borderRadius: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
+    elevation: 10,
+    margin: 15
+  },
+
+  registerButtonUser: {
+    backgroundColor: '#2F76B7'
+  },
+
+  registerButtonCompany: {
+    backgroundColor: '#32B72F'
+  },
+
+  registerButtonText: {
+    fontSize: FontSize(22),
+    color: 'white',
+    fontFamily: 'Poppins_600SemiBold'
+  }
 })
 
 export default styles;

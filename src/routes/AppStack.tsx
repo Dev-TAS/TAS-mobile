@@ -7,7 +7,10 @@ import Login from '../pages/Login'
 import CreateAccount from '../pages/CreateAccount'
 import CreateAccountSuccess from '../pages/CreateAccountSuccess'
 import Landing from '../pages/Landing'
+import Profile from '../pages/Profile'
 import SearchLocation from '../pages/SearchLocation'
+import Locations from '../pages/Locations'
+import CreateLocation from '../pages/CreateLocation'
 import Maps from '../components/Map'
 
 const {Navigator, Screen} = createStackNavigator();
@@ -20,7 +23,10 @@ function AppStack() {
         <Screen name='CreateAccount' component={CreateAccount} />
         <Screen name='CreateAccountSuccess' component={CreateAccountSuccess} />
         <Screen name='Landing' component={Landing} />
+        <Screen name='Profile' component={Profile} />
         <Screen name='SearchLocation' component={SearchLocation} />
+        <Screen name='Locations' component={Locations} />
+        <Screen name='CreateLocation' component={CreateLocation} />
         <Screen name='Maps' component={Maps} />
       </Navigator>
     </NavigationContainer>

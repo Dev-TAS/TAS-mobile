@@ -14,7 +14,7 @@ function SearchLocation() {
 
   const company: Company = {
     id: 1,
-    name: 'Empresa Teste LTDA',
+    company_name: 'teste',
     phone: '552198770-8021',
     whatsapp: '552198770-8021',
     serviceType: 'Comercialização',

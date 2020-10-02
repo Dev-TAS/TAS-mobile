@@ -1,6 +1,6 @@
 import { useNavigation } from '@react-navigation/native';
 import React, {useEffect, useState} from 'react';
-import { Keyboard, Route, Text, View } from 'react-native';
+import { Alert, Keyboard, Route, Text, View } from 'react-native';
 import { RectButton, ScrollView, TextInput } from 'react-native-gesture-handler';
 import api from '../../services/api';
 
@@ -11,8 +11,9 @@ function CreateAccount(props:Route) {
   const connectionType = props.route.params.connectionType;
 
   function handleNavigateToCreateAccountSuccess() {
-    navigate('CreateAccountSuccess');
+    navigate('CreateAccountSuccess', {connectionType});
   }
+  
   //#region UseState
   const [logIn, setlogIn] = useState('');
   const [email, setEmail] = useState('');
@@ -123,10 +124,10 @@ function CreateAccount(props:Route) {
           alert('Erro no cadastro!');
         })
       } else {
-        console.log('Esse usuário já existe!')
+        Alert.alert('Alerta!', 'Esse usuário já existe!')
       }
     } else {
-      console.log(message)
+      Alert.alert('Alerta!', message);
     }
   }
   //#endregion Verify

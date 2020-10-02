@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, Image, Route } from 'react-native';
 import { RectButton, BorderlessButton } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
@@ -13,65 +13,105 @@ import { Entypo } from '@expo/vector-icons';
 
 import styles from './styles';
 
+import api from '../../services/api';
+
 function Landing(props:Route) {
   const { navigate } = useNavigation();
+  const [isRegisterExists, setIsRegisterExists] = useState(true);
   const connectionType = props.route.params.connectionType;
   const account_id = props.route.params.account_id;
+  let company_id: number;
+
+  async function handleRegisterVerify() {
+    let table = ''
+    connectionType ? table = 'users' : table = 'companies'
+    const response = await api.get(table, {
+      params: {
+        account_id
+      }
+    })
+    response.data[0] ? [setIsRegisterExists(true), company_id = response.data[0].id] 
+    : setIsRegisterExists(false)
+  }
   
   function handleNavigateToSearchLocation() {
     navigate('SearchLocation')
   }
-  console.log(connectionType, account_id)
-  return(
-    <>
-      <View style={styles.logoContainer}>
-        <Image source={Logo} style={styles.logoImage} />
-        <Text style={styles.title}>Tecnologia Ambiental e {'\n'}Sustentabilidade</Text>
-      </View>
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Seja bem vindo!{'\n'}
-          <Text style={styles.welcomeBold}>O que deseja fazer?</Text>
-        </Text>
+  
+  function handleNavigateToProfile() {
+    navigate('Profile', {account_id, connectionType})
+  }
 
-        <View style={styles.buttonsContainer}>
-          <RectButton
-            onPress={handleNavigateToSearchLocation}
-            style={[styles.button, styles.buttonPrimary]}
-          >
-            <View style={styles.svgMargin}>
-              <RecicleIcon />
-            </View>
-            <Text style={[styles.buttonText, styles.buttonTextPrimary]}>Locais de Reciclagem</Text>
-          </RectButton>
+  function handleNavigateToLocations() {
+    navigate('Locations', {company_id, account_id})
+  }
 
-          <RectButton
-            style={[styles.button, styles.buttonSecondary]}
+  handleRegisterVerify();
+
+  if(isRegisterExists) {
+    return(
+      <>
+        <View style={[styles.logoContainer, connectionType ? styles.logoContainerUser : styles.logoContainerCompany]}>
+          <Image source={Logo} style={styles.logoImage} />
+          <Text style={styles.title}>Tecnologia Ambiental e {'\n'}Sustentabilidade</Text>
+        </View>
+        <View style={styles.container}>
+          <Text style={styles.welcome}>
+            Seja bem vindo!{'\n'}
+            <Text style={styles.welcomeBold}>O que deseja fazer?</Text>
+          </Text>
+  
+          <View style={styles.buttonsContainer}>
+            <RectButton
+              onPress={ connectionType ? handleNavigateToSearchLocation : handleNavigateToLocations}
+              style={[styles.button, styles.buttonPrimary]}
+            >
+              <View style={styles.svgMargin}>
+                <RecicleIcon />
+              </View>
+              <Text style={[styles.buttonText, styles.buttonTextPrimary]}> {connectionType ? 'Locais de Reciclagem' : 'Meus Locais'}</Text>
+            </RectButton>
+  
+            <RectButton
+              style={[styles.button, styles.buttonSecondary]}
+            >
+              <Entypo name="shop" size={80} color="white" />
+              <Text style={styles.buttonText}>Loja virtual</Text>
+            </RectButton>
+          </View>
+        </View>
+  
+        <View style={styles.socialMediasContainer}>
+          <Text style={styles.socialMediasText}>Nos acompanhe em todo lugar!{'\n'} Redes sociais:</Text>
+          <View style={styles.socialMediasButtonsContainer}>
+            <BorderlessButton>
+              <FontAwesome5 name="facebook-square" size={40} color="#3b5998" />
+            </BorderlessButton>
+  
+            <BorderlessButton>
+              <FontAwesome name="twitter-square" size={40} color="#08A0E9" />
+            </BorderlessButton>
+  
+            <BorderlessButton>
+              <Image source={InstagramIcon} resizeMode='contain'/>
+            </BorderlessButton>
+          </View>
+        </View>
+      </>
+    );
+  } else {
+    return(
+        <View style={[styles.registerContainer, connectionType ? styles.registerContainerUser : styles.registerContainerCompany]}>
+          <Text style={styles.registerText}>Você ainda não{'\n'}registrou seus dados!</Text>
+          <RectButton 
+          style={[styles.registerButton, connectionType ? styles.registerButtonUser : styles.registerButtonCompany]}
+          onPress={handleNavigateToProfile}
           >
-            <Entypo name="shop" size={80} color="white" />
-            <Text style={styles.buttonText}>Loja virtual</Text>
+            <Text style={styles.registerButtonText}>Registrar agora</Text>
           </RectButton>
         </View>
-      </View>
-
-      <View style={styles.socialMediasContainer}>
-        <Text style={styles.socialMediasText}>Nos acompanhe em todo lugar!{'\n'} Redes sociais:</Text>
-        <View style={styles.socialMediasButtonsContainer}>
-          <BorderlessButton>
-            <FontAwesome5 name="facebook-square" size={40} color="#3b5998" />
-          </BorderlessButton>
-
-          <BorderlessButton>
-            <FontAwesome name="twitter-square" size={40} color="#08A0E9" />
-          </BorderlessButton>
-
-          <BorderlessButton>
-            <Image source={InstagramIcon} resizeMode='contain'/>
-          </BorderlessButton>
-        </View>
-      </View>
-    </>
-  );
+    );
+  }
 }
 
 export default Landing;
