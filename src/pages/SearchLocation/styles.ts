@@ -49,12 +49,14 @@ const styles = StyleSheet.create({
   },
 
   input: {
-    fontSize: FontSize(16),
-    padding: 10,
-  },
-
-  input1: {
-    borderTopWidth: 0.2
+    width: '100%',
+    backgroundColor: 'white',
+    height: 50,
+    paddingLeft: 15,
+    fontSize: FontSize(18),
+    fontWeight: "600",
+    borderRadius: 10,
+    marginBottom: 20
   },
 
   buttonSearch: {
