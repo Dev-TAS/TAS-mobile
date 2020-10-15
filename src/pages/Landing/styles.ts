@@ -21,6 +21,24 @@ const styles = StyleSheet.create({
     backgroundColor: '#2F76B7'
   },
 
+  profileButton: {
+    backgroundColor: 'white',
+    width: 50,
+    height: 50,
+    alignSelf: 'flex-end',
+    marginTop: '2%',
+    borderRadius: 25,
+    alignItems: 'center',
+    justifyContent: 'center',
+    elevation: 20
+  },
+
+  profileImage: {
+    width: '100%',
+    height: '100%',
+    borderRadius: 50
+  },
+
   logoImage: {
     resizeMode: 'contain',
     width: 130

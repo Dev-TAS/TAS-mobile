@@ -43,6 +43,7 @@ const UserProfile: React.FC<UserProfileProps> = ( {account_id, connectionType} )
           email,
           phone,
           whatsapp,
+          avatar: 'https://img2.gratispng.com/20180413/wze/kisspng-beta-tester-software-testing-beta-verzia-computer-arc-5ad062da3d5527.2574186515236062342512.jpg',
           state,
           city,
           account_id

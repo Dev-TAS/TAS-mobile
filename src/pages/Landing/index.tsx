@@ -21,6 +21,7 @@ function Landing(props:Route) {
   const connectionType = props.route.params.connectionType;
   const account_id = props.route.params.account_id;
   let company_id: number;
+  let profileImage = undefined;
 
   async function handleRegisterVerify() {
     let table = ''
@@ -30,7 +31,7 @@ function Landing(props:Route) {
         account_id
       }
     })
-    response.data[0] ? [setIsRegisterExists(true), company_id = response.data[0].id] 
+    response.data[0] ? [setIsRegisterExists(true), company_id = response.data[0].id, profileImage = response.data[0].data]
     : setIsRegisterExists(false)
   }
   
@@ -52,6 +53,15 @@ function Landing(props:Route) {
     return(
       <>
         <View style={[styles.logoContainer, connectionType ? styles.logoContainerUser : styles.logoContainerCompany]}>
+          <BorderlessButton 
+            style={styles.profileButton}
+            onPress={handleNavigateToProfile}
+          >
+            <Image 
+              style={styles.profileImage}
+              source={ {uri:'https://img2.gratispng.com/20180413/wze/kisspng-beta-tester-software-testing-beta-verzia-computer-arc-5ad062da3d5527.2574186515236062342512.jpg'} }
+            />
+          </BorderlessButton>
           <Image source={Logo} style={styles.logoImage} />
           <Text style={styles.title}>Tecnologia Ambiental e {'\n'}Sustentabilidade</Text>
         </View>
