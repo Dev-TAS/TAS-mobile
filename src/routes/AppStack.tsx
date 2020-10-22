@@ -11,6 +11,8 @@ import Profile from '../pages/Profile'
 import SearchLocation from '../pages/SearchLocation'
 import Locations from '../pages/Locations'
 import CreateLocation from '../pages/CreateLocation'
+import Shop from '../pages/Shop'
+import CreateCoupons from '../pages/CreateCoupons'
 import Maps from '../components/Map'
 
 const {Navigator, Screen} = createStackNavigator();
@@ -27,6 +29,8 @@ function AppStack() {
         <Screen name='SearchLocation' component={SearchLocation} />
         <Screen name='Locations' component={Locations} />
         <Screen name='CreateLocation' component={CreateLocation} />
+        <Screen name='Shop' component={Shop} />
+        <Screen name='CreateCoupons' component={CreateCoupons} />
         <Screen name='Maps' component={Maps} />
       </Navigator>
     </NavigationContainer>

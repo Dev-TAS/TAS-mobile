@@ -7,10 +7,9 @@ const styles = StyleSheet.create({
   logoContainer: {
     width: '100%',
     height: '30%',
-    justifyContent: 'center',
+    justifyContent: 'flex-end',
     alignItems: 'center',
-    padding: 40,
-    
+    paddingHorizontal: 40,
   },
 
   logoContainerUser: {
@@ -26,11 +25,11 @@ const styles = StyleSheet.create({
     width: 50,
     height: 50,
     alignSelf: 'flex-end',
-    marginTop: '2%',
+    marginTop: 25,
     borderRadius: 25,
     alignItems: 'center',
     justifyContent: 'center',
-    elevation: 20
+    elevation: 10
   },
 
   profileImage: {
@@ -41,7 +40,7 @@ const styles = StyleSheet.create({
 
   logoImage: {
     resizeMode: 'contain',
-    width: 130
+    marginTop: -20
   },
 
   title: {

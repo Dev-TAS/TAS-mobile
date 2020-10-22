@@ -1,5 +1,5 @@
 import { useNavigation } from '@react-navigation/native';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Alert, Image, Text, View } from 'react-native';
 import { RectButton, ScrollView, TextInput } from 'react-native-gesture-handler';
 import api from '../../../services/api';
@@ -12,6 +12,7 @@ interface CompanyProfileProps {
 
 const CompanyProfile: React.FC<CompanyProfileProps> = ( {account_id, connectionType} ) => {
   const {navigate} = useNavigation();
+  const [profile, setProfile] = useState(undefined);
   const [name, setName] = useState('');
   const [cnpj, setCnpj] = useState('');
   const [email, setEmail] = useState('');
@@ -35,7 +36,59 @@ const CompanyProfile: React.FC<CompanyProfileProps> = ( {account_id, connectionT
     }
   }
 
+  async function handleProfileVerify() {
+    const returnProfile = await api.get('companies', {
+      params: {
+        account_id
+      }
+    })
+    if(returnProfile.data[0] !== undefined) {
+      const profile = returnProfile.data[0]
+      setProfile(profile);
+      setName(profile.name);
+      setCnpj(profile.cnpj);
+      setEmail(profile.email);
+      setPhone(profile.phone);
+      setWhatsapp(profile.whatsapp);
+      setBio(profile.bio);
+    }
+  }
+
   async function handleRegisterProfile() {
+    await api.post('companies', {
+      name,
+      cnpj,
+      email,
+      phone,
+      avatar: 'https://img2.gratispng.com/20180413/wze/kisspng-beta-tester-software-testing-beta-verzia-computer-arc-5ad062da3d5527.2574186515236062342512.jpg',
+      whatsapp,
+      bio,
+      account_id
+    }).then( () => {
+      navigate('Landing', {account_id, connectionType})
+    }).catch( () => {
+      alert('Erro no cadastro!');
+    })
+  }
+
+  async function handleUpdateProfile() {
+    await api.put('companies', {
+      name,
+      cnpj,
+      email,
+      phone,
+      bio,
+      avatar: 'https://img2.gratispng.com/20180413/wze/kisspng-beta-tester-software-testing-beta-verzia-computer-arc-5ad062da3d5527.2574186515236062342512.jpg',
+      whatsapp,
+      account_id
+    }).then( () => {
+      navigate('Landing', {account_id, connectionType})
+    }).catch( () => {
+      alert('Erro no cadastro!');
+    })
+  }
+
+  function saveProfile() {
     const verify = [handleNameVerify(), handleCnpjVerify()];
     let confirmVerify = true;
     let message = ''
@@ -46,32 +99,21 @@ const CompanyProfile: React.FC<CompanyProfileProps> = ( {account_id, connectionT
         message += element + '\n'
       }
     });
-    if(confirmVerify === true && message === '') {
-      const returnProfile = await api.get('companies', {
-        params: {
-          account_id
-        }
-      })
-      const profile = returnProfile.data[0]
+
+    if(confirmVerify === true) {
       if(profile === undefined) {
-        await api.post('companies', {
-          name,
-          cnpj,
-          email,
-          phone,
-          whatsapp,
-          bio,
-          account_id
-        }).then( () => {
-          navigate('Landing', {account_id, connectionType})
-        }).catch( () => {
-          alert('Erro no cadastro!');
-        })
-      }     
+        handleRegisterProfile();
+      } else {
+        handleUpdateProfile();
+      }
     } else {
-      Alert.alert('Alerta!', message)
+      Alert.alert(message);
     }
   }
+
+  useEffect( () => {
+    handleProfileVerify();
+  }, []);
 
   return (
   <>
@@ -130,7 +172,7 @@ const CompanyProfile: React.FC<CompanyProfileProps> = ( {account_id, connectionT
 
           <RectButton
             style={styles.saveButton}
-            onPress={handleRegisterProfile}
+            onPress={saveProfile}
           >
             <Text style={styles.saveButtonText}>Salvar</Text>
           </RectButton>

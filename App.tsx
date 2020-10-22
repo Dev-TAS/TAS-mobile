@@ -15,5 +15,15 @@ export default function App() {
     Poppins_600SemiBold
   });
   
-  return !fontsLoaded ? <AppLoading /> : <AppStack />
+  if(!fontsLoaded) {
+    return <AppLoading />
+
+  } else {
+    return (
+      <>
+        <StatusBar style="auto" />
+        <AppStack />  
+      </>
+    );
+  }
 }

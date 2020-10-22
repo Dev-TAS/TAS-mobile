@@ -47,6 +47,10 @@ function Landing(props:Route) {
     navigate('Locations', {company_id, account_id})
   }
 
+  function handleNavigateToShop() {
+    navigate('Shop', {account_id, connectionType});
+  }
+
   handleRegisterVerify();
 
   if(isRegisterExists) {
@@ -84,6 +88,7 @@ function Landing(props:Route) {
   
             <RectButton
               style={[styles.button, styles.buttonSecondary]}
+              onPress={handleNavigateToShop}
             >
               <Entypo name="shop" size={80} color="white" />
               <Text style={styles.buttonText}>Loja virtual</Text>

@@ -34,9 +34,7 @@ function Locations(props:Route) {
 
   useEffect( () => {
     handleReturnLocations();
-  });
- 
-
+  }, []);
   return (
     <>
       <View style={styles.bannerContainer}>

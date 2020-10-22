@@ -1,5 +1,5 @@
 import { useNavigation } from '@react-navigation/native';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Image, Text, View } from 'react-native'
 import { RectButton, ScrollView, TextInput } from 'react-native-gesture-handler';
 
@@ -14,6 +14,7 @@ interface UserProfileProps {
 
 const UserProfile: React.FC<UserProfileProps> = ( {account_id, connectionType} ) => {
   const {navigate} = useNavigation();
+  const [profile, setProfile] = useState(undefined);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
@@ -27,34 +28,74 @@ const UserProfile: React.FC<UserProfileProps> = ( {account_id, connectionType} )
     }
   }
 
-  async function handleRegisterProfile() {
-    const nameVerif = handleNameVerify();
-    if(nameVerif === true) {
-      const returnProfile = await api.get('users', {
-        params: {
-          account_id
-        }
-      })
+  async function handleProfileVerify() {
+    const returnProfile = await api.get('users', {
+      params: {
+        account_id
+      }
+    });
+
+    if(returnProfile.data[0] !== undefined) {
       const profile = returnProfile.data[0]
-      console.log(profile)
-      if(profile === undefined) {
-        await api.post('users', {
-          name,
-          email,
-          phone,
-          whatsapp,
-          avatar: 'https://img2.gratispng.com/20180413/wze/kisspng-beta-tester-software-testing-beta-verzia-computer-arc-5ad062da3d5527.2574186515236062342512.jpg',
-          state,
-          city,
-          account_id
-        }).then( () => {
-          navigate('Landing', {account_id, connectionType})
-        }).catch( () => {
-          alert('Erro no cadastro!');
-        })
-      }     
+      setProfile(profile);
+      setName(profile.name);
+      setEmail(profile.email);
+      setPhone(profile.phone);
+      setWhatsapp(profile.whatsapp);
+      setState(profile.state);
+      setCity(profile.city);
     }
   }
+
+  async function handleRegisterProfile() {
+    await api.post('users', {
+      name,
+      email,
+      phone,
+      whatsapp,
+      avatar: 'https://img2.gratispng.com/20180413/wze/kisspng-beta-tester-software-testing-beta-verzia-computer-arc-5ad062da3d5527.2574186515236062342512.jpg',
+      state,
+      city,
+      account_id
+    }).then( () => {
+      navigate('Landing', {account_id, connectionType})
+    }).catch( () => {
+      alert('Erro no cadastro!');
+    })   
+  }
+
+  async function handleUpdateProfile() {
+    await api.put('users', {
+      name,
+      email,
+      phone,
+      whatsapp,
+      avatar: 'https://img2.gratispng.com/20180413/wze/kisspng-beta-tester-software-testing-beta-verzia-computer-arc-5ad062da3d5527.2574186515236062342512.jpg',
+      state,
+      city,
+      account_id
+    }).then( () => {
+      navigate('Landing', {account_id, connectionType})
+    }).catch( () => {
+      alert('Erro no cadastro!');
+    })
+  }
+
+  function saveProfile() {
+    const nameVerif = handleNameVerify();
+    if(nameVerif === true) {
+
+      if(profile === undefined) {
+        handleRegisterProfile();
+      } else {
+        handleUpdateProfile();
+      }
+    }
+  }
+
+  useEffect( () => {
+    handleProfileVerify();
+  }, []);
   
   return(
     <>
@@ -118,7 +159,7 @@ const UserProfile: React.FC<UserProfileProps> = ( {account_id, connectionType} )
 
           <RectButton
             style={styles.saveButton}
-            onPress={handleRegisterProfile}
+            onPress={saveProfile}
           >
             <Text style={styles.saveButtonText}>Salvar</Text>
           </RectButton>
