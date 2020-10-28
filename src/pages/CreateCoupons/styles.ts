@@ -55,6 +55,32 @@ const styles = StyleSheet.create({
     fontSize: FontSize(22),
     fontFamily: 'Poppins_600SemiBold',
     textAlign: 'center'
+  },
+
+  buttonCouponContainer: {
+    width: '100%',
+    height: '20%',
+    backgroundColor: '#9030B8',
+    alignItems: 'center',
+    justifyContent: 'center',
+    alignSelf: 'flex-end',
+    paddingHorizontal: 40,
+  },
+
+  buttonCoupon: {
+    width: '100%',
+    height: 70,
+    borderRadius: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#3C3F42',
+    elevation: 10
+  },
+
+  buttonCouponText: {
+    color: '#FFF',
+    fontSize: FontSize(26),
+    fontFamily: 'Poppins_600SemiBold',
   }
 });
 

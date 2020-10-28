@@ -56,7 +56,8 @@ const UserProfile: React.FC<UserProfileProps> = ( {account_id, connectionType} )
       avatar: 'https://img2.gratispng.com/20180413/wze/kisspng-beta-tester-software-testing-beta-verzia-computer-arc-5ad062da3d5527.2574186515236062342512.jpg',
       state,
       city,
-      account_id
+      account_id,
+      points: 10000
     }).then( () => {
       navigate('Landing', {account_id, connectionType})
     }).catch( () => {

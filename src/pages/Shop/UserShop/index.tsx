@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Text, View } from 'react-native';
 import { RectButton } from 'react-native-gesture-handler';
 
@@ -7,6 +7,7 @@ import { Entypo } from '@expo/vector-icons';
 
 import styles from './styles';
 import { useNavigation } from '@react-navigation/native';
+import api from '../../../services/api';
 
 interface UserShopProps {
   account_id: number
@@ -15,11 +16,28 @@ interface UserShopProps {
 
 const UserShop: React.FC<UserShopProps> = ( {account_id, connectionType} ) => {
   const {navigate} = useNavigation();
-  const [points, setPoints] = useState(100);
+  const [points, setPoints] = useState();
 
   function handleNavigateToCreateCoupons() {
     navigate('CreateCoupons', {account_id, connectionType});
   }
+
+  async function handleReturnPoints() {
+    const returnPoints = await api.get('users', {
+      params: {
+        account_id
+      }
+    })
+
+    const points = returnPoints.data[0].points;
+    console.log(points);
+
+    setPoints(points);
+  }
+
+  useEffect( () => {
+    handleReturnPoints();
+  }, [] );
 
   return (
     <>
