@@ -15,7 +15,7 @@ function CreateAccount(props:Route) {
   }
   
   //#region UseState
-  const [logIn, setlogIn] = useState('');
+  const [cpfOrCnpj, setCpfOrCnpj] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -44,16 +44,29 @@ function CreateAccount(props:Route) {
   //#endregion Keyboard
 
   //#region Verify
-  function handleLoginVerify() {
-    if(logIn !== '') {
-      if(logIn.length > 4) {
-        return '';
-
+  function handleCpfOrCnpjVerify() {
+    if(connectionType) {
+      if(cpfOrCnpj !== '') {
+        if(cpfOrCnpj.length > 10) {
+          return '';
+  
+        } else {
+          return('Seu CPF deve conter 11 dígitos!')
+        }
       } else {
-        return('Seu LogIn deve conter mais que 4 dígitos!')
+        return('CPF Vazio!')
       }
     } else {
-      return('LogIn Vazio!')
+      if(cpfOrCnpj !== '') {
+        if(cpfOrCnpj.length > 13) {
+          return '';
+  
+        } else {
+          return('Seu CNPJ deve conter 14 dígitos!')
+        }
+      } else {
+        return('CNPJ Vazio!')
+      }
     }
   }
 
@@ -87,7 +100,7 @@ function CreateAccount(props:Route) {
   }
 
   async function handleAccountVerify() {
-    const verify = [handleLoginVerify(), handleEmailVerify(), handlePasswordVerify()]
+    const verify = [handleCpfOrCnpjVerify(), handleEmailVerify(), handlePasswordVerify()]
     let confirmVerify = true;
     let message = ''
 
@@ -103,7 +116,7 @@ function CreateAccount(props:Route) {
       connectionType ? table = 'userAccounts' : table = 'companyAccounts'
       const logInResponse = await api.get(table, {
         params: {
-          logIn
+          cpfOrCnpj
         }
       })
 
@@ -115,7 +128,7 @@ function CreateAccount(props:Route) {
       console.log(logInResponse.data, emailResponse.data)
       if(logInResponse.data !== 1 && emailResponse.data !== 1) {
         await api.post(table, {
-          logIn,
+          cpfOrCnpj,
           email,
           password
         }).then( () => {
@@ -145,9 +158,10 @@ function CreateAccount(props:Route) {
           <View style={styles.inputContainer}>
             <TextInput
               style={[styles.input, styles.input1]}
-              placeholder='Login'
-              value={logIn}
-              onChangeText={ (text) => setlogIn(text) }
+              placeholder={connectionType? 'CPF, apenas números' : 'CNPJ, apenas números'}
+              maxLength={connectionType? 11 : 14}
+              value={cpfOrCnpj}
+              onChangeText={ (text) => setCpfOrCnpj(text) }
             />
 
             <TextInput 

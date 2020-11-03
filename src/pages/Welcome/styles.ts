@@ -23,8 +23,8 @@ const styles = StyleSheet.create({
   logoText: {
     color: 'black',
     textAlign: 'center',
-    fontSize: FontSize(16),
-    fontFamily: 'Poppins_400Regular'
+    fontSize: FontSize(22),
+    fontFamily: 'Poppins_600SemiBold'
   },
 
   welcomeText: {

@@ -3,7 +3,7 @@ import { Alert, Keyboard, Route, Text, View } from "react-native";
 import { useNavigation } from '@react-navigation/native';
 import { BorderlessButton, RectButton, ScrollView, TextInput } from 'react-native-gesture-handler';
 
-import styles from '../Login/styles';
+import styles from './styles';
 
 import { FontAwesome5 } from '@expo/vector-icons';
 
@@ -13,7 +13,7 @@ function Login(props:Route) {
   const connectionType = props.route.params.connectionType;
 
   //#region UseState
-    const [logIn, setLogIn] = useState('');
+    const [cpfOrCnpj, setCpfOrCnpj] = useState('');
     const [password, setPassword] = useState('');
     const {navigate} = useNavigation();
     const [isTitleContainerVisible, setIsTitleContainerVisible] = useState(true);
@@ -55,7 +55,7 @@ function Login(props:Route) {
     connectionType ? table = 'userAccounts' : table = 'companyAccounts'
     const response = await api.get(table, {
       params: {
-        logIn,
+        cpfOrCnpj,
         password
       }
     })
@@ -94,9 +94,10 @@ function Login(props:Route) {
           <View style={styles.inputContainer}>
             <TextInput 
               style={[styles.input, styles.input1]}
-              placeholder='Login ou E-mail'
-              value={logIn}
-              onChangeText={ (text) => setLogIn(text) }
+              placeholder={connectionType? 'CPF' : 'CNPJ'}
+              value={cpfOrCnpj}
+              maxLength={connectionType? 11 : 14}
+              onChangeText={ (text) => setCpfOrCnpj(text) }
               />
 
             <TextInput 

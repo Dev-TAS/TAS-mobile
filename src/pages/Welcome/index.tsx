@@ -23,7 +23,7 @@ function Welcome() {
     <View style={styles.container}>
       <View style={styles.logoContainer}>
         <Image source={Logo} style={styles.logoImage}/>
-        <Text style={styles.logoText}>Tecnologia Ambiental e{'\n'}Sustentabilidade</Text>
+        <Text style={styles.logoText}>Coleta Amiga</Text>
       </View>
       <View>
         <Text style={styles.welcomeText}>Seja bem vindo! {'\n'}

@@ -14,7 +14,6 @@ const CompanyProfile: React.FC<CompanyProfileProps> = ( {account_id, connectionT
   const {navigate} = useNavigation();
   const [profile, setProfile] = useState(undefined);
   const [name, setName] = useState('');
-  const [cnpj, setCnpj] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
   const [whatsapp, setWhatsapp] = useState('');
@@ -28,14 +27,6 @@ const CompanyProfile: React.FC<CompanyProfileProps> = ( {account_id, connectionT
     }
   }
 
-  function handleCnpjVerify() {
-    if(cnpj.length >= 14) {
-      return ''
-    } else {
-      return('seu CNPJ tem menos de 14 dígitos!')
-    }
-  }
-
   async function handleProfileVerify() {
     const returnProfile = await api.get('companies', {
       params: {
@@ -46,7 +37,6 @@ const CompanyProfile: React.FC<CompanyProfileProps> = ( {account_id, connectionT
       const profile = returnProfile.data[0]
       setProfile(profile);
       setName(profile.name);
-      setCnpj(profile.cnpj);
       setEmail(profile.email);
       setPhone(profile.phone);
       setWhatsapp(profile.whatsapp);
@@ -57,7 +47,6 @@ const CompanyProfile: React.FC<CompanyProfileProps> = ( {account_id, connectionT
   async function handleRegisterProfile() {
     await api.post('companies', {
       name,
-      cnpj,
       email,
       phone,
       avatar: 'https://img2.gratispng.com/20180413/wze/kisspng-beta-tester-software-testing-beta-verzia-computer-arc-5ad062da3d5527.2574186515236062342512.jpg',
@@ -74,7 +63,6 @@ const CompanyProfile: React.FC<CompanyProfileProps> = ( {account_id, connectionT
   async function handleUpdateProfile() {
     await api.put('companies', {
       name,
-      cnpj,
       email,
       phone,
       bio,
@@ -89,7 +77,7 @@ const CompanyProfile: React.FC<CompanyProfileProps> = ( {account_id, connectionT
   }
 
   function saveProfile() {
-    const verify = [handleNameVerify(), handleCnpjVerify()];
+    const verify = [handleNameVerify()];
     let confirmVerify = true;
     let message = ''
 
@@ -131,13 +119,6 @@ const CompanyProfile: React.FC<CompanyProfileProps> = ( {account_id, connectionT
             placeholder='Ex: Empresa Teste LTDA'
             value={name}
             onChangeText={ (text) => setName(text) }
-          />
-
-          <Text style={styles.inputText}>CNPJ:</Text>
-          <TextInput
-            style={styles.input}
-            value={cnpj}
-            onChangeText={ (text) => setCnpj(text) }
           />
 
           <Text style={styles.inputText}>E-mail:</Text>
