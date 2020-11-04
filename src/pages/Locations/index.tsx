@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Dimensions, Route, Text, View } from 'react-native'
 import { RectButton, ScrollView } from 'react-native-gesture-handler';
-import { useNavigation } from '@react-navigation/native';
+import { useFocusEffect, useNavigation } from '@react-navigation/native';
 
 import CompanyItem, {Company} from '../../components/CompanyItem';
 
@@ -34,6 +34,7 @@ function Locations(props:Route) {
 
   useEffect( () => {
     handleReturnLocations();
+    console.log('o')
   }, []);
   return (
     <>

@@ -111,16 +111,7 @@ function CreateLocation(props:Route) {
           longitude = location.longitude;
           title = location.title;
         }
-        console.log('b')
-        const returnCompany = await api.get('companies', {
-          params: {
-            account_id
-          }
-        })
-        console.log('a')
-        const company_name = returnCompany.data[0].name;
-
-        console.log(company_name)
+        
         await api.post('companyLocations', {
           phone,
           whatsapp,
@@ -134,7 +125,6 @@ function CreateLocation(props:Route) {
           longitude,
           title,
           company_id,
-          company_name
         }).then( () => {
           handleNavigateToLocations();
         }).catch( () => {

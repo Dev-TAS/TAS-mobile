@@ -161,6 +161,7 @@ function CreateAccount(props:Route) {
               placeholder={connectionType? 'CPF, apenas números' : 'CNPJ, apenas números'}
               maxLength={connectionType? 11 : 14}
               value={cpfOrCnpj}
+              keyboardType={"numeric"}
               onChangeText={ (text) => setCpfOrCnpj(text) }
             />
 

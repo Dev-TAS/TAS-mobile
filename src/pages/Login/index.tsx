@@ -97,6 +97,7 @@ function Login(props:Route) {
               placeholder={connectionType? 'CPF' : 'CNPJ'}
               value={cpfOrCnpj}
               maxLength={connectionType? 11 : 14}
+              keyboardType={"numeric"}
               onChangeText={ (text) => setCpfOrCnpj(text) }
               />
 
