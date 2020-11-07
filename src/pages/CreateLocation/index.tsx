@@ -294,7 +294,6 @@ function CreateLocation(props:Route) {
             />
           }
         </MapView>
-        <Search onLocationSelected={handleLocationSelected} />
         </View>
         <View style={styles.buttonsContainer}>
           <RectButton 

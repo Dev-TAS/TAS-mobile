@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { PROVIDER_GOOGLE } from 'react-native-maps';
 import MapView, { Marker } from 'react-native-maps';
 import { getPixelSize } from '../utils'
 import { Route, View } from 'react-native';
@@ -57,6 +58,7 @@ class Maps extends Component<{ route: Route }> {
       <>
         <View>
           <MapView
+          provider={PROVIDER_GOOGLE}
           style={styles.map}
           loadingEnabled={true}
           toolbarEnabled={true}

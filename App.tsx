@@ -1,6 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { AppLoading } from 'expo'
+import React, { useEffect } from 'react';
+import { AppLoading } from 'expo';
+import * as Updates from 'expo-updates';
 
 import AppStack from './src/routes/AppStack'
 
@@ -14,6 +15,17 @@ export default function App() {
     Poppins_400Regular, 
     Poppins_600SemiBold
   });
+
+  useEffect(() => {
+    async function updateApp() {
+      const { isAvailable } = await Updates.checkForUpdateAsync();
+      if (isAvailable) {
+        await Updates.fetchUpdateAsync();
+        await Updates.reloadAsync(); // depende da sua estratégia
+      }
+    }
+    updateApp();
+  }, []);
   
   if(!fontsLoaded) {
     return <AppLoading />

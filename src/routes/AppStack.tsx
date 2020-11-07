@@ -20,6 +20,7 @@ function AppStack() {
   return (
     <NavigationContainer>
       <Navigator screenOptions={{ headerShown: false }}>
+        <Screen name='Maps' component={Maps} />
         <Screen name='Welcome' component={Welcome} />
         <Screen name='Login' component={Login} />
         <Screen name='CreateAccount' component={CreateAccount} />
@@ -31,7 +32,7 @@ function AppStack() {
         <Screen name='CreateLocation' component={CreateLocation} />
         <Screen name='Shop' component={Shop} />
         <Screen name='CreateCoupons' component={CreateCoupons} />
-        <Screen name='Maps' component={Maps} />
+        
       </Navigator>
     </NavigationContainer>
   )
