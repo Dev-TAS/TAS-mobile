@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Route, Text, View } from 'react-native';
+import { Alert, Route, Text, View } from 'react-native';
 import { RectButton, ScrollView, TextInput } from 'react-native-gesture-handler';
 import MapView, {Marker} from 'react-native-maps';
 
@@ -15,6 +15,7 @@ import { useNavigation } from '@react-navigation/native';
 
 function CreateLocation(props:Route) {
   const {navigate} = useNavigation();
+  const {goBack} = useNavigation();
   const company_id = props.route.params.company_id;
   const account_id = props.route.params.account_id;
   //#region UseState
@@ -29,8 +30,8 @@ function CreateLocation(props:Route) {
     const [isMapVisible, setIsMapVisible] = useState(false);
     const [coordinatesTitle, setCoordinatesTitle] = useState('');
     const [location, setLocation]  = useState({
-      latitude: -1,
-      longitude: -1,
+      latitude: -1.0,
+      longitude: -1.0,
       title: ''
     });
     const [region, setRegion] = useState({
@@ -101,17 +102,17 @@ function CreateLocation(props:Route) {
         }
       });
 
-      if(confirmVerify === true && message === '') {
-        let latitude = null;
-        let longitude = null;
-        let title = null;
+      let latitude = null
+      let longitude = null
+      let title = ''
 
-        if(coordinatesTitle !== '') {
-          latitude = location.latitude;
-          longitude = location.longitude;
-          title = location.title;
-        }
-        
+      if(location.title !== '') {
+        latitude = location.latitude.toString();
+        longitude = location.longitude.toString();
+        title = location.title
+      }
+
+      if(confirmVerify === true && message === '') {
         await api.post('companyLocations', {
           phone,
           whatsapp,
@@ -124,14 +125,14 @@ function CreateLocation(props:Route) {
           latitude,
           longitude,
           title,
-          company_id,
+          company_id
         }).then( () => {
-          handleNavigateToLocations();
-        }).catch( () => {
-          alert('Erro no cadastro!');
+          goBack();
+        }).catch( (e) => {
+          console.log(e)
         })
       } else {
-        console.log(message)
+        alert(message)
       }
     }
 
@@ -290,10 +291,11 @@ function CreateLocation(props:Route) {
           {location.longitude != null &&
             <Marker
               coordinate={location}
-              image={locationIcon}
+              //image={locationIcon}
             />
           }
         </MapView>
+        <Search onLocationSelected={handleLocationSelected} />
         </View>
         <View style={styles.buttonsContainer}>
           <RectButton 

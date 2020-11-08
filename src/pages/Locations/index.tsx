@@ -34,7 +34,6 @@ function Locations(props:Route) {
 
   useEffect( () => {
     handleReturnLocations();
-    console.log('o')
   }, []);
   return (
     <>

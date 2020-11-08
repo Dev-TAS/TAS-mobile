@@ -22,8 +22,8 @@ export interface Company {
   locationNumber: number;
   cnpj: string;
   avatar?: string | undefined;
-  latitude: number;
-  longitude: number;
+  latitude: string;
+  longitude: string;
 }
 
 interface CompanyItemProps {
@@ -31,8 +31,8 @@ interface CompanyItemProps {
 }
 
 const CompanyItem: React.FC<CompanyItemProps> = ( {company} ) => {
-  const latitude = company.latitude;
-  const longitude = company.longitude;
+  const latitude = parseFloat(company.latitude);
+  const longitude = parseFloat(company.longitude);
   const { navigate } = useNavigation();
   const mapLocation = { latitude, longitude }
   function handleNavigateToMap() {

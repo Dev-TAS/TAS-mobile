@@ -15,7 +15,7 @@ class Maps extends Component<{ route: Route }> {
   mapView: any;
   state = {
     region: undefined,
-    destination: this.props.route.params.mapLocation || undefined,  /*destination: {latitude: -22.8853169,longitude: -43.0504129},*/
+    destination: this.props.route.params.mapLocation || undefined //destination: {latitude: -22.8853169,longitude: -43.0504129}
   }
   
   async componentDidMount() {
@@ -86,7 +86,7 @@ class Maps extends Component<{ route: Route }> {
               />
               <Marker
                 coordinate={destination}
-                image={locationIcon}
+                //image={locationIcon}
               />
             </>
           )}
