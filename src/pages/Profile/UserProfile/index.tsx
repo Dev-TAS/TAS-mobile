@@ -2,6 +2,7 @@ import { useNavigation } from '@react-navigation/native';
 import React, { useEffect, useState } from 'react'
 import { Image, Text, View } from 'react-native'
 import { RectButton, ScrollView, TextInput } from 'react-native-gesture-handler';
+import { PhoneNumberMask } from '../../../assets/masks';
 
 import api from '../../../services/api';
 
@@ -113,6 +114,7 @@ const UserProfile: React.FC<UserProfileProps> = ( {account_id, connectionType} )
             style={styles.input}
             placeholder='Ex: Lucas de Oliveira'
             value={name}
+            maxLength={40}
             onChangeText={ (text) => setName(text) }
           />
 
@@ -121,6 +123,7 @@ const UserProfile: React.FC<UserProfileProps> = ( {account_id, connectionType} )
             style={styles.input}
             placeholder='Ex: user123@mail.com'
             value={email}
+            maxLength={40}
             onChangeText={ (text) => setEmail(text) }
           />
 
@@ -128,14 +131,20 @@ const UserProfile: React.FC<UserProfileProps> = ( {account_id, connectionType} )
           <TextInput 
             style={styles.input}
             value={phone}
-            onChangeText={ (text) => setPhone(text) }
+            placeholder="incluindo DDD"
+            keyboardType={'numeric'}
+            maxLength={14}
+            onChangeText={ (text) => setPhone(PhoneNumberMask(text)) }
           />
 
           <Text style={styles.inputText }>WhatsApp</Text>
           <TextInput 
             style={styles.input}
             value={whatsapp}
-            onChangeText={ (text) => setWhatsapp(text) }
+            placeholder="incluindo DDD"
+            keyboardType={'numeric'}
+            maxLength={14}
+            onChangeText={ (text) => setWhatsapp(PhoneNumberMask(text)) }
           />
 
           <View style={styles.inputStateContainer}>
@@ -144,6 +153,7 @@ const UserProfile: React.FC<UserProfileProps> = ( {account_id, connectionType} )
               <TextInput
                 style={styles.input}
                 value={state}
+                maxLength={20}
                 onChangeText={ (text) => setState(text) }
               />
             </View>
@@ -153,6 +163,7 @@ const UserProfile: React.FC<UserProfileProps> = ( {account_id, connectionType} )
               <TextInput
                 style={styles.input}
                 value={city}
+                maxLength={20}
                 onChangeText={ (text) => setCity(text) }
               />
             </View>

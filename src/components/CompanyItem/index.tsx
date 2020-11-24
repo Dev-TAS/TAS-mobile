@@ -40,7 +40,9 @@ const CompanyItem: React.FC<CompanyItemProps> = ( {company} ) => {
   }
   
   function handleLinkToWhatsapp() {
-    Linking.openURL(`whatsapp://send?text=Olá! vim através do TAS! &phone=${company.whatsapp}`)
+    Linking.openURL(`whatsapp://send?text=Olá! vim através do TAS! &phone=55${
+      company.whatsapp?.replace('(', '').replace(')', '')
+    }`)
   }
 
   function handleLinkToTel() {

@@ -12,6 +12,7 @@ import Search from '../../components/Search';
 import styles from './styles'
 import api from '../../services/api';
 import { useNavigation } from '@react-navigation/native';
+import { PhoneNumberMask } from '../../assets/masks';
 
 function CreateLocation(props:Route) {
   const {navigate} = useNavigation();
@@ -46,10 +47,7 @@ function CreateLocation(props:Route) {
     function handleSwapToMaps() {
       setIsMapVisible(true);
     }
-    
-    function handleNavigateToLocations() {
-      navigate('Locations', {company_id, account_id})
-    }
+
     //#region CampVerify
       function handleStateCampVerify() {
         let message = '';
@@ -226,6 +224,7 @@ function CreateLocation(props:Route) {
           <TextInput 
             style={styles.input}
             value={localNumber}
+            keyboardType={'numeric'}
             onChangeText={ text => setLocalNumber(text) } 
           />
 
@@ -233,14 +232,18 @@ function CreateLocation(props:Route) {
           <TextInput 
             style={styles.input}
             value={phone}
-            onChangeText={ text => setPhone(text) } 
+            maxLength={14}
+            keyboardType={'numeric'}
+            onChangeText={ text => setPhone(PhoneNumberMask(text)) } 
           />
 
           <Text style={styles.inputText}>Whatsapp:</Text>
           <TextInput 
             style={styles.input}
             value={whatsapp}
-            onChangeText={ text => setWhatsapp(text) } 
+            maxLength={14}
+            keyboardType={'numeric'}
+            onChangeText={ text => setWhatsapp(PhoneNumberMask(text)) } 
           />
 
           <Text style={styles.inputText}>Tipos de serviço:</Text>

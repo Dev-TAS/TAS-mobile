@@ -2,6 +2,7 @@ import { useNavigation } from '@react-navigation/native';
 import React, {useEffect, useState} from 'react';
 import { Alert, Keyboard, Route, Text, View } from 'react-native';
 import { RectButton, ScrollView, TextInput } from 'react-native-gesture-handler';
+import { CnpjMask, CpfMask } from '../../assets/masks';
 import api from '../../services/api';
 
 import styles from './styles'
@@ -159,10 +160,10 @@ function CreateAccount(props:Route) {
             <TextInput
               style={[styles.input, styles.input1]}
               placeholder={connectionType? 'CPF, apenas números' : 'CNPJ, apenas números'}
-              maxLength={connectionType? 11 : 14}
+              maxLength={connectionType? 14 : 18}
               value={cpfOrCnpj}
               keyboardType={"numeric"}
-              onChangeText={ (text) => setCpfOrCnpj(text) }
+              onChangeText={ (text) => setCpfOrCnpj(connectionType? CpfMask(text) : CnpjMask(text)) }
             />
 
             <TextInput 
@@ -175,6 +176,7 @@ function CreateAccount(props:Route) {
             <TextInput 
               style={styles.input}
               placeholder='Senha'
+              secureTextEntry={true}
               value={password}
               onChangeText={ (text)  => setPassword(text) }
             />
@@ -183,6 +185,7 @@ function CreateAccount(props:Route) {
               style={[styles.input, styles.input2]}
               placeholder='Confirmar Senha'
               value={confirmPassword}
+              secureTextEntry={true}
               onChangeText={ (text)  => setConfirmPassword(text) }
             />
           </View>

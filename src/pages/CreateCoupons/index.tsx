@@ -1,4 +1,4 @@
-import moment, { tz } from 'moment';
+import { tz } from 'moment';
 import React, { useEffect, useState } from 'react'
 import { Keyboard, Route, Text, View } from 'react-native';
 import { RectButton, ScrollView, TextInput } from 'react-native-gesture-handler';
@@ -8,9 +8,11 @@ import CouponItem, {Coupon} from '../../components/CouponItem'
 import api from '../../services/api';
 
 import styles from './styles'
+import { useNavigation } from '@react-navigation/native';
 
 function CreateCoupons(props:Route) {
   const account_id = props.route.params.account_id;
+  const {goBack} = useNavigation();
   const [points, setPoints] = useState(0);
   const [isInfoTextVisible, setIsInfoTextVisible] = useState(true);
   const [pointsToConvert, setPointsToConvert] = useState('');
@@ -52,7 +54,7 @@ function CreateCoupons(props:Route) {
     if(text !== '') {
       const value = parseInt(text);
       const convert = (value / 100).toFixed(2).slice(-6)
-      setPointsConverted('R$ ' + convert.replace('.', ','));
+      setPointsConverted('R$' + convert.replace('.', ','));
     } else {
       setPointsConverted('R$ 0,00')
     }
@@ -92,14 +94,16 @@ function CreateCoupons(props:Route) {
     const verify = verifyValue();
     if(verify) {
       const code = createCouponCode();
+      const points = parseInt(pointsToConvert);
+      const value = parseFloat(pointsConverted.replace('R$', '').replace(',', '.')).toFixed(2);
       const date = (tz('America/Sao_Paulo'). format('HH:mm:ss DD/MM/YYYY')).toString();
 
       await api.post('coupons', {
         code,
-        points: pointsToConvert,
-        value: pointsConverted,
-        status: 'Ativo',
-        date,
+        points,
+        value,
+        status: true,
+        date: (tz('America/Sao_Paulo').format('YYYY/MM/DD HH:mm:ss')),
         account_id
       }).then( () => {
         const coupon: Coupon = {
@@ -120,7 +124,6 @@ function CreateCoupons(props:Route) {
 
   useEffect( () => {
     handleReturnPoints();
-    console.log()
   }, [] );
 
   return (
@@ -179,7 +182,10 @@ function CreateCoupons(props:Route) {
       <>
         <CouponItem coupon={coupon} />
         <View style={styles.buttonCouponContainer}>
-          <RectButton style={styles.buttonCoupon}>
+          <RectButton 
+            onPress={goBack}
+            style={styles.buttonCoupon}
+          >
             <Text style={styles.buttonCouponText}>Voltar</Text>
           </RectButton>
         </View>

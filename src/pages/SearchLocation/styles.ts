@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
 
   scrollContainer: {
     minHeight: 0,
-    maxHeight: '50%',
+    maxHeight: '50%'
   }
 })
 

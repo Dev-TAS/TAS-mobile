@@ -8,6 +8,7 @@ import styles from './styles';
 import { FontAwesome5 } from '@expo/vector-icons';
 
 import api from '../../services/api'
+import { CnpjMask, CpfMask } from '../../assets/masks';
 
 function Login(props:Route) {
   const connectionType = props.route.params.connectionType;
@@ -96,14 +97,15 @@ function Login(props:Route) {
               style={[styles.input, styles.input1]}
               placeholder={connectionType? 'CPF' : 'CNPJ'}
               value={cpfOrCnpj}
-              maxLength={connectionType? 11 : 14}
+              maxLength={connectionType? 14 : 18}
               keyboardType={"numeric"}
-              onChangeText={ (text) => setCpfOrCnpj(text) }
+              onChangeText={ (text) => setCpfOrCnpj(connectionType? CpfMask(text) : CnpjMask(text)) }
               />
 
             <TextInput 
               style={[styles.input, styles.input2]}
               placeholder='Senha'
+              secureTextEntry={true}
               value={password}
               onChangeText={ (text) => setPassword(text) }
               />

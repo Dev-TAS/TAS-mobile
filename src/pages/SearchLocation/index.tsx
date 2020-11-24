@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { View, Text, Dimensions, Alert} from 'react-native'
+import React, { useEffect, useState } from 'react'
+import { View, Text, Dimensions, Alert, Keyboard} from 'react-native'
 import { BorderlessButton, TextInput, RectButton, ScrollView } from 'react-native-gesture-handler';
 import { FontAwesome5 } from '@expo/vector-icons'; 
 
@@ -17,6 +17,27 @@ function SearchLocation() {
   const[isFiltersVisible, setIsFiltersVisible] = useState(false);
   const[isBannerVisible, setIsBannerVisible] = useState(true);
   const[isScrollContainerVisible, setIsScrollContainerVisible] = useState(false);
+
+  //#region KeyBoard
+  useEffect(() => {
+    Keyboard.addListener("keyboardDidShow", _keyboardDidShow);
+    Keyboard.addListener("keyboardDidHide", _keyboardDidHide);
+  
+    // cleanup function
+    return () => {
+      Keyboard.removeListener("keyboardDidShow", _keyboardDidShow);
+      Keyboard.removeListener("keyboardDidHide", _keyboardDidHide);
+    };
+  }, []);
+  
+  const _keyboardDidShow = () => {
+    setIsScrollContainerVisible(false);
+  };
+  
+  const _keyboardDidHide = () => {
+    setIsScrollContainerVisible(true);
+  };
+//#endregion KeyBoard
 
   function handleToggleFiltersVisible() {
     setIsFiltersVisible(!isFiltersVisible);
@@ -97,7 +118,7 @@ function SearchLocation() {
           </View>
         }
       </View>
-      { isScrollContainerVisible && 
+      { isScrollContainerVisible && locations[0] &&
         <ScrollView 
           style={styles.scrollContainer}
         >

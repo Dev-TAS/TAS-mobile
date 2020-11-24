@@ -2,6 +2,7 @@ import { useNavigation } from '@react-navigation/native';
 import React, { useEffect, useState } from 'react'
 import { Alert, Image, Text, View } from 'react-native';
 import { RectButton, ScrollView, TextInput } from 'react-native-gesture-handler';
+import { PhoneNumberMask } from '../../../assets/masks';
 import api from '../../../services/api';
 import styles from './styles';
 
@@ -132,14 +133,20 @@ const CompanyProfile: React.FC<CompanyProfileProps> = ( {account_id, connectionT
           <TextInput 
             style={styles.input}
             value={phone}
-            onChangeText={ (text) => setPhone(text) }
+            keyboardType={'numeric'}
+            placeholder="Incluindo DDD"
+            maxLength={14}
+            onChangeText={ (text) => setPhone(PhoneNumberMask(text)) }
           />
 
           <Text style={styles.inputText}>Whatsapp:</Text>
           <TextInput 
             style={styles.input}
             value={whatsapp}
-            onChangeText={ (text) => setWhatsapp(text) }
+            keyboardType={'numeric'}
+            placeholder="Incluindo DDD"
+            maxLength={14}
+            onChangeText={ (text) => setWhatsapp(PhoneNumberMask(text)) }
           />
 
           <Text style={styles.inputText}>Descrição</Text>

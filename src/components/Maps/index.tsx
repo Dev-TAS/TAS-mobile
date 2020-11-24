@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { PROVIDER_GOOGLE } from 'react-native-maps';
 import MapView, { Marker } from 'react-native-maps';
-import { getPixelSize } from '../utils'
+import { getPixelSize } from '../../assets/getPixelSize'
 import { Route, View } from 'react-native';
 
 import Search from '../Search';

@@ -19,6 +19,10 @@ function Welcome() {
     navigate('Login', {connectionType: null})
   }
 
+  function handleNavigateToAboutUs() {
+    navigate('AboutUs');
+  }
+
   return (
     <View style={styles.container}>
       <View style={styles.logoContainer}>
@@ -48,7 +52,10 @@ function Welcome() {
         </View>
       </View>
       
-      <BorderlessButton style={styles.aboutUsButton}>
+      <BorderlessButton 
+        style={styles.aboutUsButton}
+        onPress={handleNavigateToAboutUs}
+      >
         <FontAwesome5 name="question-circle" size={50} color="white" />
         <Text style={styles.buttonText}>Sobre nós</Text>
       </BorderlessButton>

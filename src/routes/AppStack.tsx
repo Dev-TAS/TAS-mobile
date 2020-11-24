@@ -14,6 +14,7 @@ import CreateLocation from '../pages/CreateLocation'
 import Shop from '../pages/Shop'
 import CreateCoupons from '../pages/CreateCoupons'
 import Maps from '../components/Maps'
+import AboutUs from '../pages/AboutUs'
 
 const {Navigator, Screen} = createStackNavigator();
 function AppStack() {
@@ -21,6 +22,7 @@ function AppStack() {
     <NavigationContainer>
       <Navigator screenOptions={{ headerShown: false }}>
         <Screen name='Welcome' component={Welcome} />
+        <Screen name='AboutUs' component={AboutUs} />
         <Screen name='Login' component={Login} />
         <Screen name='CreateLocation' component={CreateLocation} />
         <Screen name='Maps' component={Maps} />
