@@ -20,14 +20,14 @@
       "bundleIdentifier": "com.tas.coletaamiga",
       "supportsTablet": true,
       "config": {
-        "googleMapsApiKey": "AIzaSyDDB3i6_YQ5KY9oJgpb4VtLWBqLaiQiTqM"
+        "googleMapsApiKey": "AIzaSyBvtbqur65QZ9MX3ZdUMPi3HPWxd0CW2vw"
       }
     },
     "android": {
       "package": "com.tas.coletaamiga",
       "config": {
         "googleMaps": {
-          "apiKey": "AIzaSyAiTr3jBpHjTtxkJ_ONOwgciFjPdVDs0UU"
+          "apiKey": "AIzaSyCX1CDvN_7D-LpF-Su6VhbE9nWTWAQm718"
         }
       }
     },
