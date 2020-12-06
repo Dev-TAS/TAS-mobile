@@ -1,7 +1,7 @@
 import { useNavigation } from '@react-navigation/native';
 import React from 'react'
 import { Text, View } from 'react-native';
-import { RectButton } from 'react-native-gesture-handler';
+import { RectButton, ScrollView } from 'react-native-gesture-handler';
 import Carousel from 'react-native-snap-carousel';
 import getWindowSize from '../../assets/getWindowSize';
 
@@ -15,7 +15,7 @@ interface carouselItem {
 }
 
 function AboutUs() {
-  const {goBack} = useNavigation();
+  const { goBack } = useNavigation();
 
   const carouselItens = [
     {
@@ -33,7 +33,7 @@ function AboutUs() {
   const windowWidth = getWindowSize();
   const itemWidth = (getWindowSize() - 100);
 
-  function renderItem({item}: carouselItem) {
+  function renderItem({ item }: carouselItem) {
     return (
       <View>
         <Text style={styles.title}>{item.title}</Text>
@@ -44,23 +44,27 @@ function AboutUs() {
     );
   }
 
- return (
-   <View style={styles.container}>
-     <Carousel
-      layout={'default'}
-      data={carouselItens}
-      sliderWidth={windowWidth}
-      itemWidth={itemWidth}
-      renderItem={renderItem}
-     />
-      <RectButton 
-        style={styles.button}
-        onPress={goBack}
-      >
-        <Text style={styles.buttonText}>Voltar</Text>
-      </RectButton>
-   </View>
- );
+  return (
+
+    <View style={styles.container}>
+      <ScrollView style={{ flex: 1}}>
+        <Carousel
+          layout={'default'}
+          data={carouselItens}
+          sliderWidth={windowWidth}
+          itemWidth={itemWidth}
+          renderItem={renderItem}
+        />
+        <RectButton
+          style={styles.button}
+          onPress={goBack}
+        >
+          <Text style={styles.buttonText}>Voltar</Text>
+        </RectButton>
+      </ScrollView>
+    </View>
+
+  );
 }
 
 export default AboutUs;

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { View, Text, Image, Linking } from 'react-native';
 import { BorderlessButton } from 'react-native-gesture-handler';
 
@@ -6,11 +6,12 @@ import { FontAwesome5 } from '@expo/vector-icons';
 
 import styles from './styles';
 import { useNavigation } from '@react-navigation/native';
+import api from '../../services/api';
 
 
 export interface Company {
   id: number;
-  company_name: string;
+  company_id: string;
   email?: string;
   phone: string | undefined;
   whatsapp?: string | undefined;
@@ -33,6 +34,7 @@ interface CompanyItemProps {
 const CompanyItem: React.FC<CompanyItemProps> = ( {company} ) => {
   const latitude = parseFloat(company.latitude);
   const longitude = parseFloat(company.longitude);
+  const [name, setName] = useState('');
   const { navigate } = useNavigation();
   const mapLocation = { latitude, longitude }
   function handleNavigateToMap() {
@@ -49,12 +51,30 @@ const CompanyItem: React.FC<CompanyItemProps> = ( {company} ) => {
     Linking.openURL(`tel://${company.phone}`)
   }
 
+  async function returnCompanyName() {
+    const company_id = company.company_id;
+    
+    const returnCompany = await api.get('companies', {
+      params: {
+        id: 1
+      }
+    })
+
+    const name = returnCompany.data[0].name;
+
+    setName(name);
+  }
+
+  useEffect( () => {
+    returnCompanyName();
+  }, [])
+
   return (
     <View style={styles.container}>
       <View style={styles.nameContainer}>
         <Image style={styles.avatar} source={ { uri:company.avatar } } />
           <Text style={styles.name}>
-            {company.company_name}
+            {name}
           </Text> 
       </View>
       <Text style={styles.address}>
