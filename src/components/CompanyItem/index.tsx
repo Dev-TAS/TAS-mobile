@@ -56,7 +56,7 @@ const CompanyItem: React.FC<CompanyItemProps> = ( {company} ) => {
     
     const returnCompany = await api.get('companies', {
       params: {
-        id: 1
+        id: company_id
       }
     })
 
