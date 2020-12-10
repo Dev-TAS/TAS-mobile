@@ -9,7 +9,6 @@ npm-debug.*
 *.orig.*
 web-build/
 .node_modules
-README.md
 
 # macOS
 .DS_Store
