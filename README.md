@@ -54,7 +54,7 @@
   <strong>Ferramentas e tecnologias usadas</strong>
 </h3>
 
-<img src="./src/assets/images/tecnologies.png" width="80%"/>
+<img src="./src/assets/images/tecnologies.png" width="600"/>
 
 ## Author
 
