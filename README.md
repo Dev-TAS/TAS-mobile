@@ -36,6 +36,7 @@
     </td>
   <tr>
 </table>
+<br><br>
 
 <h3>
   <strong>Formas de usar</strong>
@@ -48,6 +49,12 @@
 >2. Use o aplicativo Expo no seu celular ou emulador para testar o projeto, basta acessar o link abaixo, escanear o QR code com o aplicativo Expo(Apenas Android) ou inserir seu E-mail no campo 'Request a link', onde será enviado um link que dará acesso ao projeto através do Expo
 ### ✨ (https://expo.io/@erthaldeveloper/projects/TAS-mobile)
 <br>
+
+<h3>
+  <strong>Ferramentas e tecnologias usadas</strong>
+</h3>
+
+<img src="./src/assets/images/tecnologies.png" width="80%"/>
 
 ## Author
 
