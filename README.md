@@ -29,10 +29,10 @@
   </tr>
   <tr>
     <td> 
-      <img src="./src/assets/gifs/TasMapScreen.gif" height="500" />
+      <img src="./src/assets/gifs/TasMapScreen.gif" width="240" />
     </td>
     <td> 
-      <img src="./src/assets/gifs/TasCouponScreen.gif" height="500" />
+      <img src="./src/assets/gifs/TasCouponScreen.gif" width="240" />
     </td>
   <tr>
 </table>
