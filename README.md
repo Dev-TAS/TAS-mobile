@@ -15,13 +15,13 @@
   </tr>
   <tr>
     <td> 
-      <img src="./src/assets/gifs/TasFirstScreen.gif" height="500" />
+      <img src="./src/assets/gifs/TasFirstScreen.gif" width="240" />
     </td>
     <td> 
-      <img src="./src/assets/gifs/TasCreateAccountScreen.gif" height="500" />
+      <img src="./src/assets/gifs/TasCreateAccountScreen.gif" width="240" />
     </td>
     <td> 
-      <img src="./src/assets/gifs/TasProfiletScreen.gif" height="500" />
+      <img src="./src/assets/gifs/TasProfiletScreen.gif" width="240" />
     </td>
   <tr>
     <th><strong>Visualizar no Maps:</strong></th>
